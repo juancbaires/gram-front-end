@@ -31,7 +31,7 @@ export default class register extends Component {
               <input type="text" placeholder="Your Name" />
             </span>
             <span className="form_blocks">
-              <i class="material-icons icons">arrow_drop_down_circle</i>
+              <i className="material-icons icons">face</i>
               <input type="number" placeholder="Age" min="0" max="100" />
             </span>
             {/* this below is the button */}
