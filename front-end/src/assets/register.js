@@ -20,7 +20,7 @@ export default class register extends Component {
     return (
       <div className="wrapper">
         <section className="form-box">
-          <form action="submit">
+          <form action="submit" onSubmit={this.handleSubmit}>
             <span
               style={{
                 color: "#ff3366",

@@ -1,0 +1,65 @@
+.cards-container {
+  font-family: Roboto;
+  width: 100%;
+  display: flex;
+}
+
+img {
+  height: 350px;
+  width: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.gallery {
+  width: 100%;
+  display: flex !important;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  margin: 4.5rem 4.5rem;
+  padding-bottom: 3rem;
+  /* border: 1px solid black; */
+  list-style: none !important;
+}
+
+.gallery-item {
+  display: flex;
+  max-width: 375px;
+  position: relative;
+  flex: 1 0 22rem;
+  margin: 1rem;
+  color: #fff;
+  cursor: pointer;
+  list-style: none;
+}
+
+.gallery-item:hover {
+  cursor: pointer !important;
+  opacity: 0.6;
+  -webkit-transform: translate(0, -10px);
+  transform: translate(0, -5px);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.hidden-not-hover {
+  visibility: hidden;
+  margin-top: 150px;
+  margin-left: calc(50% + -85px);
+  position: absolute;
+  /* background-color: black; */
+  height: 40px;
+  /* width: 80px; */
+  float: left !important;
+}
+
+.gallery-item:hover .hidden-not-hover {
+  visibility: visible;
+}
+
+.hidden-not-hover .icons-hover {
+  font-size: 1.7rem;
+  margin: 1.5rem;
+  font-weight: 800;
+}
