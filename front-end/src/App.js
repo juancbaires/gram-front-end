@@ -21,10 +21,21 @@ class App extends Component {
     data: ""
   };
 
-  // check to see of user is logged out of site, if so set user
+  // check to see of user is logged into site, if so set user
   componentDidMount() {
     this.setuser();
+    this.setUserData();
   }
+  // get user info like name, email .....
+  setUserData = async => {
+    try {
+      const data = localStorage.getItem("userInfo");
+      console.log(data);
+      this.setState({ data });
+    } catch (error) {
+      console.log({ ERROR: error });
+    }
+  };
   // handle logout of user
   logOff = async token => {
     localStorage.clear();
@@ -51,9 +62,16 @@ class App extends Component {
     }
   };
 
-  setuser = () => {
+  setuser = async () => {
     if (localStorage.token) {
-      this.setState({ isLoggedIn: true, user: decode(localStorage.token) });
+      try {
+        this.setState({
+          isLoggedIn: true,
+          user: decode(localStorage.token)
+        });
+      } catch (error) {
+        console.log(error, "please log in to set user");
+      }
     }
   };
 
@@ -64,6 +82,7 @@ class App extends Component {
       });
       const { data } = userData;
       localStorage.token = data.token;
+      localStorage.setItem("userInfo", data.user.username);
       this.setState({ isLoggedIn: true, data });
       history.push("/");
     } catch (error) {
@@ -78,6 +97,7 @@ class App extends Component {
       });
       const { data } = userData;
       localStorage.token = data.token;
+      localStorage.setItem("userInfo", data.user.username);
       this.setState({ isLoggedIn: true, data });
       history.push("/");
     } catch (error) {
