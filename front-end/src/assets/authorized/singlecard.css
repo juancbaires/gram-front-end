@@ -1,0 +1,147 @@
+.single-container {
+  width: 100%;
+  /* text-align: center; */
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+.single-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  /* width: 500px; */
+  border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  align-self: center;
+  /* max-height: 600px; */
+}
+#round-icon {
+  border-radius: 50%;
+  padding: 8px;
+  margin: 8px;
+}
+.single-container .header {
+  font-family: Roboto;
+  color: #262626;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  /* margin-left: -5px; */
+  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+}
+
+.footer {
+  display: flex;
+  height: 100%;
+  flex: auto;
+  flex-direction: column;
+  width: 300px;
+}
+
+.single-container .body {
+  height: 600px;
+  width: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+}
+
+.single-wrapper .card-icons i {
+  font-size: 25px;
+  padding: 5px;
+}
+.card-icons {
+  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  padding: 7px;
+}
+.card-icons i:hover {
+  cursor: pointer;
+}
+.comment-wrapper {
+  min-height: 387px;
+  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+}
+.comment-card:not(i) {
+  font-family: Roboto;
+  font-size: 14px;
+  color: #262626;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 15px;
+  display: flex;
+  /* line-height: 21px; */
+}
+
+.comment-card .h3 {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+}
+.comment-card p {
+  padding: 12px 6px 2px;
+}
+
+.single-container .form {
+  display: flex;
+  /* width: 100%; */
+  flex-direction: column;
+}
+
+.card-date {
+  padding: 8px;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+  color: #999999;
+  font-weight: 600;
+}
+
+.last-icon-right {
+  flex-grow: 21;
+  float: right;
+}
+
+.comment-form input[type="text"] {
+  -webkit-appearance: none !important;
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  background-color: #fff;
+  color: #302f26;
+  /* display: block; */
+  font-size: 16px;
+  height: 25px;
+  letter-spacing: 1px;
+  line-height: 22px;
+  margin: -1px auto;
+  outline: 0 !important;
+  padding: 15px 10px;
+  max-width: 60%;
+  border-bottom: none;
+}
+
+.comment-form input[type="text"]:focus {
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  border-left: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  border-right: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  border-bottom: none;
+}
+
+.comment-form input[type="submit"] {
+  display: inline-block;
+  background-color: transparent;
+  color: rgba(var(--h5f, 56, 151, 240), 1);
+  padding: 0;
+  margin: 0;
+  opacity: 0.3;
+  width: 30%;
+  text-align: center;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.scrollable {
+  height: 80px;
+  overflow: auto;
+  text-align: justify;
+}

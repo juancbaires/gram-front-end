@@ -11,6 +11,7 @@ import decode from "jwt-decode";
 import axios from "axios";
 import Login from "./assets/login";
 import Home from "./assets/authorized/home";
+import Singlecard from "./assets/authorized/singlecard";
 
 const history = createBrowserHistory();
 class App extends Component {
@@ -18,19 +19,41 @@ class App extends Component {
     isLoggedIn: false,
     user: "",
     error: "",
-    data: ""
+    data: "",
+    posts: ""
+  };
+
+  getAllPosts = () => {
+    axios
+      .get(
+        "http://localhost:3001/posts/allofposts",
+        {},
+        {
+          bearer: {
+            Authorization: "Bearer " + localStorage.token
+          }
+        }
+      )
+      .then(response => {
+        const { data } = response;
+        let holder = [...data];
+        this.setState({ posts: holder });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   // check to see of user is logged into site, if so set user
   componentDidMount() {
     this.setuser();
     this.setUserData();
+    this.getAllPosts();
   }
   // get user info like name, email .....
   setUserData = async => {
     try {
       const data = localStorage.getItem("userInfo");
-      console.log(data);
       this.setState({ data });
     } catch (error) {
       console.log({ ERROR: error });
@@ -112,7 +135,19 @@ class App extends Component {
         <main>
           <Switch>
             {this.state.isLoggedIn && (
-              <Route path="/" render={() => <Home></Home>}></Route>
+              <Switch>
+                <Route
+                  exact
+                  path="/:id"
+                  render={() => (
+                    <Singlecard {...this.state} {...this.props}></Singlecard>
+                  )}
+                ></Route>
+                <Route
+                  path="/"
+                  render={() => <Home {...this.state}></Home>}
+                ></Route>
+              </Switch>
             )}
             <Route
               path="/register"

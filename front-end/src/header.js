@@ -8,13 +8,12 @@ export default class header extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { isLoggedIn } = this.props;
     return (
       <div className="navigation">
-        <a className="logo_name" href="#?">
+        <NavLink to="/" className="logo_name">
           PixaShare
-        </a>
+        </NavLink>
         {isLoggedIn ? (
           <>
             <a href="#/">Profile</a>

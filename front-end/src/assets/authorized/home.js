@@ -1,47 +1,22 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import { Link } from "react-router-dom";
 import "./home.css";
 
 export default class home extends Component {
   state = {
     data: ""
   };
-  componentDidMount() {
-    Axios.get(
-      "http://localhost:3001/posts/allofposts",
-      {},
-      {
-        bearer: {
-          Authorization: "Bearer " + localStorage.token
-        }
-      }
-    )
-      .then(response => {
-        const { data } = response;
-        let holder = [...data];
-        this.setState({ data: holder });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+
   render() {
     return (
       <div className="cards-container">
-        {this.state.data && (
+        {this.props.posts && (
           <>
             <ul className="gallery">
-              {this.state.data.map((item, index) => (
-                <>
-                  <li
-                    className="gallery-item"
-                    key={index + Math.floor(Math.random() * 101).toString()}
-                  >
-                    <img
-                      src={item.img}
-                      key={index + Math.floor(Math.random() * 101).toString()}
-                      alt="avatar"
-                    />
+              {this.props.posts.map((item, index) => (
+                <Link to={`/${item._id}`} key={index}>
+                  <li className="gallery-item">
+                    <img src={item.img} alt="avatar" />
                     <span className="hidden-not-hover">
                       <i className="fas fa-heart icons-hover">{""}</i>
                       <i className="fas fa-comment icons-hover">
@@ -50,19 +25,12 @@ export default class home extends Component {
                       </i>
                     </span>
                   </li>
-                  {/* <li>{item.time}</li>
-                  <li key={index + Math.floor(Math.random() * 101).toString()}>
-                    {item.content}
-                  </li>
-                  <li key={index + Math.floor(Math.random() * 101).toString()}>
-                    {item.comments}
-                  </li> */}
-                </>
+                </Link>
               ))}
             </ul>
           </>
         )}
-        <>{!this.state.data && <h1>Loading</h1>}</>
+        <>{!this.props.posts && <h1>Loading</h1>}</>
       </div>
     );
   }
