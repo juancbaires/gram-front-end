@@ -69,7 +69,7 @@
   color: #262626;
   /* overflow: hidden; */
   text-overflow: ellipsis;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   padding: 15px;
   display: flex;
   /* line-height: 21px; */
@@ -80,8 +80,9 @@
   font-size: 14px;
   line-height: 21px;
 }
-.comment-card p {
-  padding: 12px 6px 2px;
+.comment-card .p {
+  padding-top: 12px;
+  width: 250px;
 }
 
 .single-container .form {
@@ -143,5 +144,12 @@
 .scrollable {
   height: 80px;
   overflow: auto;
-  text-align: justify;
+  text-align: left;
+  overflow-y: auto;
+}
+
+.scroll-wrapper {
+  /* background: #000000; */
+  padding: 13px auto;
+  width: 300px !important;
 }

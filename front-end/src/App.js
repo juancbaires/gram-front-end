@@ -23,6 +23,27 @@ class App extends Component {
     posts: ""
   };
 
+  // post to a comment
+  postComment = (comment, postID) => {
+    axios
+      .post(
+        `http://localhost:3001/comments/create-comment/${postID}`,
+        {
+          content: comment.comment
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.token
+          }
+        }
+      )
+      .then(res => {
+        this.getAllPosts();
+        history.push(`/${postID}`);
+      })
+      .catch(err => console.log(err));
+  };
+
   getAllPosts = () => {
     axios
       .get(
@@ -140,7 +161,11 @@ class App extends Component {
                   exact
                   path="/:id"
                   render={() => (
-                    <Singlecard {...this.state} {...this.props}></Singlecard>
+                    <Singlecard
+                      {...this.state}
+                      {...this.props}
+                      postComment={this.postComment}
+                    ></Singlecard>
                   )}
                 ></Route>
                 <Route
