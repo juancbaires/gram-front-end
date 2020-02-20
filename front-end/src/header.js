@@ -16,7 +16,7 @@ export default class header extends Component {
         </NavLink>
         {isLoggedIn ? (
           <>
-            <a href="#/">Profile</a>
+            <NavLink to={`/profile/${this.props.data}`}>Profile</NavLink>
             <a onClick={this.clearUser} className="signup-btn" href="/">
               Log Out
             </a>

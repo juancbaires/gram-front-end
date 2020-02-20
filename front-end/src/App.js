@@ -3,9 +3,8 @@ import "./App.css";
 import Header from "./header";
 import Splash from "./splash";
 import { Switch, Route, withRouter } from "react-router-dom";
-
 import { createBrowserHistory } from "history";
-
+import Profile from "./assets/authorized/profile";
 import Register from "./assets/register";
 import decode from "jwt-decode";
 import axios from "axios";
@@ -157,6 +156,13 @@ class App extends Component {
           <Switch>
             {this.state.isLoggedIn && (
               <Switch>
+                <Route
+                  exact
+                  path="/profile/:username"
+                  render={() => (
+                    <Profile {...this.props} {...this.state}></Profile>
+                  )}
+                ></Route>
                 <Route
                   exact
                   path="/:id"
