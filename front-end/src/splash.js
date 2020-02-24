@@ -8,7 +8,7 @@ export default class splash extends Component {
         <div className="content">
           <p>share, comment and like photos.</p>
           <NavLink className="link" to="/register">
-            <button>Register</button>
+            <button className="button">Register</button>
           </NavLink>
         </div>
       </div>

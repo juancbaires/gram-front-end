@@ -3,7 +3,7 @@ import "./header.css";
 import { NavLink } from "react-router-dom";
 export default class header extends Component {
   clearUser = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.logOff(localStorage.token);
   };
 

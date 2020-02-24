@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./singlecard.css";
 import Moment from "react-moment";
+import { history } from "../../App";
 export default class Singlecard extends Component {
   state = {
     comment: ""
@@ -14,28 +15,26 @@ export default class Singlecard extends Component {
     e.preventDefault();
     this.props.postComment(
       this.state,
-      this.props.location.pathname.replace(this.props.location.pathname[0], "")
+      history.location.pathname.replace(history.location.pathname[0], "")
     );
     this.setState({ comment: "" });
-    this.props.history.push(
-      `/${this.props.location.pathname.replace(
-        this.props.location.pathname[0],
-        ""
-      )}`
+    history.push(
+      `/${history.location.pathname.replace(history.location.pathname[0], "")}`
     );
   };
 
   render() {
-    const { posts, location } = this.props;
+    const { location } = history;
+    const { posts } = this.props;
     if (posts.length > 1) {
       var cardSingle = posts.find(
         card => card._id === location.pathname.replace(location.pathname[0], "")
       );
-      //   console.log(cardSingle);
+      console.log(cardSingle);
     }
     return (
       <div className="single-container">
-        {this.props.posts && (
+        {cardSingle && (
           <div className="single-wrapper">
             <span
               className="body"

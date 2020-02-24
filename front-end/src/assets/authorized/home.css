@@ -11,12 +11,17 @@ img {
   background-repeat: no-repeat;
   background-size: contain;
 }
-
+.upload-image-tile {
+  height: 350px;
+  width: 350px;
+  background-color: black;
+}
 .gallery {
   width: 100%;
   display: flex !important;
-  /* flex-direction: row; */
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   margin: 4.5rem 4.5rem;
   padding-bottom: 3rem;
   /* border: 1px solid black; */
@@ -53,12 +58,32 @@ img {
   /* width: 80px; */
   float: left !important;
 }
+.not--hover {
+  visibility: visible;
+  margin-top: 150px;
+  margin-left: calc(50% + -100px);
+  position: absolute;
+  /* background-color: black; */
+  height: 40px;
+  /* width: 80px; */
+  float: left !important;
+}
 
 .gallery-item:hover .hidden-not-hover {
   visibility: visible;
 }
 
 .hidden-not-hover .icons-hover {
+  font-size: 1.7rem;
+  margin: 1.5rem;
+  font-weight: 800;
+}
+
+.gallery-item:hover .not--hover {
+  visibility: visible;
+}
+
+.not--hover .icons-hover {
   font-size: 1.7rem;
   margin: 1.5rem;
   font-weight: 800;

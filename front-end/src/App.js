@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Header from "./header";
 import Splash from "./splash";
-import { Switch, Route, withRouter } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { Switch, Route } from "react-router-dom";
 import Profile from "./assets/authorized/profile";
 import Register from "./assets/register";
 import decode from "jwt-decode";
@@ -11,8 +10,10 @@ import axios from "axios";
 import Login from "./assets/login";
 import Home from "./assets/authorized/home";
 import Singlecard from "./assets/authorized/singlecard";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -21,6 +22,9 @@ class App extends Component {
     data: "",
     posts: ""
   };
+  // upload an image and it's content
+
+  handleUpload = (image, content) => {};
 
   // post to a comment
   postComment = (comment, postID) => {
@@ -98,8 +102,7 @@ class App extends Component {
         error: "",
         data: ""
       });
-
-      history.push("/");
+      history.push({ pathname: "/", state: this.state.isLoggedIn });
     } catch (error) {
       this.setState({ error: error.message });
     }
@@ -127,6 +130,8 @@ class App extends Component {
       localStorage.token = data.token;
       localStorage.setItem("userInfo", data.user.username);
       this.setState({ isLoggedIn: true, data });
+      this.setuser();
+      this.setUserData();
       history.push("/");
     } catch (error) {
       this.setState({ isLoggedIn: false, error });
@@ -142,6 +147,8 @@ class App extends Component {
       localStorage.token = data.token;
       localStorage.setItem("userInfo", data.user.username);
       this.setState({ isLoggedIn: true, data });
+      this.setuser();
+      this.setUserData();
       history.push("/");
     } catch (error) {
       this.setState({ error });
@@ -149,58 +156,65 @@ class App extends Component {
   };
 
   render() {
+    console.log(history);
     return (
-      <div className="App">
-        <Header {...this.state} logOff={this.logOff}></Header>
-        <main>
-          <Switch>
-            {this.state.isLoggedIn && (
-              <Switch>
-                <Route
-                  exact
-                  path="/profile/:username"
-                  render={() => (
-                    <Profile {...this.props} {...this.state}></Profile>
-                  )}
-                ></Route>
-                <Route
-                  exact
-                  path="/:id"
-                  render={() => (
-                    <Singlecard
-                      {...this.state}
-                      {...this.props}
-                      postComment={this.postComment}
-                    ></Singlecard>
-                  )}
-                ></Route>
-                <Route
-                  path="/"
-                  render={() => <Home {...this.state}></Home>}
-                ></Route>
-              </Switch>
-            )}
-            <Route
-              path="/register"
-              render={() => (
-                <Register
-                  {...this.state}
-                  createUser={this.createUser}
-                ></Register>
+      <Router history={history}>
+        <div className="App">
+          <Header {...this.state} logOff={this.logOff}></Header>
+          <main>
+            <Switch>
+              {this.state.isLoggedIn && (
+                <Switch>
+                  <Route
+                    exact
+                    path="/profile/:username"
+                    render={() => (
+                      <Profile
+                        handleUpload={this.handleUpload}
+                        {...this.state}
+                      ></Profile>
+                    )}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/:id"
+                    render={() => (
+                      <Singlecard
+                        {...this.state}
+                        {...this.props}
+                        postComment={this.postComment}
+                      ></Singlecard>
+                    )}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/"
+                    render={() => <Home {...this.state}></Home>}
+                  ></Route>
+                </Switch>
               )}
-            ></Route>
-            <Route
-              path="/login"
-              render={() => (
-                <Login {...this.state} handleAuth={this.handleAuth}></Login>
-              )}
-            ></Route>
-            <Route path="/" component={Splash}></Route>
-          </Switch>
-        </main>
-      </div>
+              <Route
+                path="/register"
+                render={() => (
+                  <Register
+                    {...this.state}
+                    createUser={this.createUser}
+                  ></Register>
+                )}
+              ></Route>
+              <Route
+                path="/login"
+                render={() => (
+                  <Login {...this.state} handleAuth={this.handleAuth}></Login>
+                )}
+              ></Route>
+              <Route path="/" component={Splash}></Route>
+            </Switch>
+          </main>
+        </div>
+      </Router>
     );
   }
 }
 
-export default withRouter(App);
+export default App;

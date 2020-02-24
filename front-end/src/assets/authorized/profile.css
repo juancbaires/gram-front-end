@@ -1,0 +1,100 @@
+.modal {
+  text-align: center;
+  font-family: Roboto;
+}
+.modal h2 {
+  text-align: center;
+}
+.styles_modal__gNwvD {
+  margin: auto !important;
+}
+
+.text-area-modal {
+  resize: none;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 30px 35px;
+}
+
+textarea {
+  width: 400px;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-weight: 500;
+}
+
+textarea:focus {
+  border: 1px solid#ff3366;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  text-transform: uppercase;
+  padding: 20px;
+  width: 150px;
+  background-color: #ff3366;
+  color: white;
+  box-shadow: none;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  border-radius: 1px;
+  border: none;
+  outline: none;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.modal-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.custom-file-upload:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.file-status {
+  margin-top: 12px;
+}
+
+.modal-footer button {
+  padding-right: 15px;
+  text-transform: uppercase;
+  padding: 20px 15px;
+  width: 150px;
+  background-color: #ff3366;
+  color: white;
+  box-shadow: none;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  border-radius: 1px;
+  border: none;
+  outline: none;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.styles_closeButton__20ID4:hover {
+  background-color: #ff3366;
+}
+
+.styles_closeButton__20ID4 svg:hover {
+  fill: #fff;
+}
