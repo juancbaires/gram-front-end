@@ -69,6 +69,7 @@ input[type="file"] {
 
 .file-status {
   margin-top: 12px;
+  overflow: hidden;
 }
 
 .modal-footer button {

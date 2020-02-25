@@ -15,34 +15,36 @@ export default class profile extends Component {
 
   handleUploadSubmit = e => {
     e.preventDefault();
-    let data = new FormData();
+    // console.log(image, content);
+    const data = new FormData();
+    data.set("content", this.state.content);
     data.append("image", this.state.image);
-
-    axios
-      .post(
-        "http://localhost:3001/posts/new-post",
-
-        {
-          data,
-          content: this.state.content
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.token
-          }
-        }
-      )
-      .then(response => {
-        console.log(response);
-        this.getAllPosts();
+    console.log(data);
+    axios({
+      method: "post",
+      url: "http://localhost:3001/posts/new-post",
+      data,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + localStorage.token
+      }
+    })
+      .then(function(response) {
+        //handle success
+        this.props.getposts();
         history.push("/");
+        // console.log(response);
       })
-      .catch(err => console.log(err));
+      .catch(function(error) {
+        //handle error
+        console.log(error);
+      });
   };
 
   onFileChange = e => {
+    console.log(e.target.files["0"]);
     this.setState({
-      image: e.target.files[0]
+      image: e.target.files["0"]
     });
   };
 
@@ -74,7 +76,15 @@ export default class profile extends Component {
                     <div className="upload-image-tile"></div>
                     <span className="not--hover">
                       <i className="fas fa-upload icons-hover"></i>
-                      <i>Upload an image</i>
+                      <i
+                        style={{
+                          fontFamily: "Roboto",
+                          fontStyle: "normal",
+                          fontWeight: "500"
+                        }}
+                      >
+                        Upload an image
+                      </i>
                     </span>
                   </li>
                 </div>
@@ -103,6 +113,7 @@ export default class profile extends Component {
                 onSubmit={this.handleUploadSubmit}
                 className="upload-form"
                 action="submit"
+                encType="multipart/form-data"
               >
                 <textarea
                   onChange={this.onContentChange}
@@ -123,7 +134,9 @@ export default class profile extends Component {
                     name="file"
                     onChange={this.onFileChange}
                   />
-                  <span className="file-status">{this.state.image.name}</span>
+                  <span trunc="true" className="file-status">
+                    {/* {this.state.image.name} */}
+                  </span>
                   <button type="submit">submit</button>
                 </div>
               </form>

@@ -170,6 +170,7 @@ class App extends Component {
                     path="/profile/:username"
                     render={() => (
                       <Profile
+                        getposts={this.getAllPosts}
                         handleUpload={this.handleUpload}
                         {...this.state}
                       ></Profile>

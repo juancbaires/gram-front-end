@@ -21,9 +21,11 @@ img {
   display: flex !important;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 4.5rem 4.5rem;
+  justify-content: space-evenly;
+  /* margin: 4.5rem 4.5rem; */
   padding-bottom: 3rem;
+  padding-top: 3rem;
+
   /* border: 1px solid black; */
   list-style: none !important;
 }

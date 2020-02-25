@@ -20,6 +20,7 @@
   margin: 8px;
 }
 .single-container .header {
+  display: flex;
   font-family: Roboto;
   color: #262626;
   font-weight: 600;
@@ -29,6 +30,10 @@
   padding: 15px;
   /* margin-left: -5px; */
   border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+}
+.header p {
+  padding: 15px;
+  flex: auto;
 }
 
 .footer {

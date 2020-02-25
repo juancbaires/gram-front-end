@@ -43,7 +43,8 @@ export default class Singlecard extends Component {
             <span className="footer">
               <span className="header">
                 <i id="round-icon" className="fas fa-user-circle icons"></i>
-                {this.props.data}
+                <p>{this.props.data}</p>
+                <p>...</p>
               </span>
               <section className="scroll-wrapper">
                 <div className="comment-wrapper scrollable">
@@ -56,7 +57,7 @@ export default class Singlecard extends Component {
                       ></i>
                       <span className="p">
                         <span className="h3">{this.props.data}</span>{" "}
-                        {`${comment.content}`}
+                        {comment.content}
                       </span>
                     </span>
                   ))}
