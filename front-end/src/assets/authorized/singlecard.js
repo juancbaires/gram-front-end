@@ -2,9 +2,61 @@ import React, { Component } from "react";
 import "./singlecard.css";
 import Moment from "react-moment";
 import { history } from "../../App";
+import Modal from "react-responsive-modal";
+import Axios from "axios";
+
 export default class Singlecard extends Component {
   state = {
-    comment: ""
+    comment: "",
+    isOpen: false,
+    ishidden: "hidden",
+    delete: "",
+    report: "",
+    open: ""
+  };
+
+  onSureDelete = e => {
+    const id = history.location.pathname.replace(
+      history.location.pathname[0],
+      ""
+    );
+    Axios.delete(`http://localhost:3001/posts/${id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.token
+      }
+    });
+    console.log({ deletedID: id });
+    history.push("/");
+    this.setState({ delete: false });
+  };
+
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
+
+  onDeleteclick = e => {
+    e.preventDefault();
+    this.setState({ delete: true, ishidden: "hidden", isOpen: false });
+    this.onOpenModal();
+  };
+
+  onChangeMind = e => {
+    e.preventDefault();
+    this.setState({ delete: false });
+    this.onCloseModal();
+  };
+
+  openMenu = () => {
+    if (this.state.isOpen === false) {
+      this.setState({ ishidden: "visible", isOpen: true });
+    }
+    if (this.state.isOpen === true) {
+      this.setState({ ishidden: "hidden", isOpen: false });
+    }
   };
 
   handleChange = e => {
@@ -30,8 +82,9 @@ export default class Singlecard extends Component {
       var cardSingle = posts.find(
         card => card._id === location.pathname.replace(location.pathname[0], "")
       );
-      console.log(cardSingle);
+      // console.log(cardSingle);
     }
+    const { open } = this.state;
     return (
       <div className="single-container">
         {cardSingle && (
@@ -44,7 +97,20 @@ export default class Singlecard extends Component {
               <span className="header">
                 <i id="round-icon" className="fas fa-user-circle icons"></i>
                 <p>{this.props.data}</p>
-                <p>...</p>
+                <p onClick={this.openMenu} className="hidden-menu-trigger">
+                  ...
+                </p>
+                <span
+                  className="hidden-menu"
+                  style={{ visibility: this.state.ishidden }}
+                >
+                  <li value="delete" name="delete" onClick={this.onDeleteclick}>
+                    Delete
+                  </li>
+                  <li name="report" value="report">
+                    Report
+                  </li>
+                </span>
               </span>
               <section className="scroll-wrapper">
                 <div className="comment-wrapper scrollable">
@@ -92,6 +158,26 @@ export default class Singlecard extends Component {
           </div>
         )}
         {!this.props.posts && <div>LOADING....</div>}
+
+        {this.state.delete && (
+          <div>
+            <Modal open={open} onClose={this.onCloseModal}>
+              <div className="modal-btn" style={{ padding: "3.2rem" }}>
+                <p>are you sure you would like to delete this post?</p>
+                <button
+                  onClick={this.onSureDelete}
+                  className="yes-btn"
+                  type="submit"
+                >
+                  Yes
+                </button>
+                <button onClick={this.onChangeMind} type="submit">
+                  No
+                </button>
+              </div>
+            </Modal>
+          </div>
+        )}
       </div>
     );
   }

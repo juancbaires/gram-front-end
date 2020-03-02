@@ -170,7 +170,7 @@ class App extends Component {
                     path="/profile/:username"
                     render={() => (
                       <Profile
-                        getposts={this.getAllPosts}
+                        getAllPosts={this.getAllPosts}
                         handleUpload={this.handleUpload}
                         {...this.state}
                       ></Profile>
@@ -190,7 +190,12 @@ class App extends Component {
                   <Route
                     exact
                     path="/"
-                    render={() => <Home {...this.state}></Home>}
+                    render={() => (
+                      <Home
+                        getAllPosts={this.getAllPosts}
+                        {...this.state}
+                      ></Home>
+                    )}
                   ></Route>
                 </Switch>
               )}

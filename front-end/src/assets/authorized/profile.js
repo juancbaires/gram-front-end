@@ -12,14 +12,18 @@ export default class profile extends Component {
     image: "",
     content: "No file selected..."
   };
+  componentDidMount() {}
+  componentDidUpdate() {
+    this.props.getAllPosts();
+  }
 
   handleUploadSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     // console.log(image, content);
     const data = new FormData();
     data.set("content", this.state.content);
     data.append("image", this.state.image);
-    console.log(data);
+    // console.log(data);
     axios({
       method: "post",
       url: "http://localhost:3001/posts/new-post",
@@ -31,8 +35,8 @@ export default class profile extends Component {
     })
       .then(function(response) {
         //handle success
-        this.props.getposts();
-        history.push("/");
+        // this.props.getAllPosts();
+        history.push(`/profile/${this.state.user._id}`);
         // console.log(response);
       })
       .catch(function(error) {

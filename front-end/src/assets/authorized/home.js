@@ -7,6 +7,10 @@ export default class home extends Component {
     data: ""
   };
 
+  componentDidMount() {
+    this.props.getAllPosts();
+  }
+
   render() {
     return (
       <div className="cards-container">
