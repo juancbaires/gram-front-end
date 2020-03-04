@@ -22,9 +22,6 @@ class App extends Component {
     data: "",
     posts: ""
   };
-  // upload an image and it's content
-
-  handleUpload = (image, content) => {};
 
   // post to a comment
   postComment = (comment, postID) => {
@@ -74,6 +71,7 @@ class App extends Component {
     this.setUserData();
     this.getAllPosts();
   }
+
   // get user info like name, email .....
   setUserData = async => {
     try {
@@ -156,7 +154,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(history);
+    // console.log(history);
     return (
       <Router history={history}>
         <div className="App">

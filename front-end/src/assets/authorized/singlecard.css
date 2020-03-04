@@ -64,6 +64,9 @@
 .card-icons i:hover {
   cursor: pointer;
 }
+.card-icons .fas {
+  color: #ff3366 !important;
+}
 .comment-wrapper {
   min-height: 387px;
   border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);

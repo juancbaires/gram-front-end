@@ -10,7 +10,9 @@ export default class home extends Component {
   componentDidMount() {
     this.props.getAllPosts();
   }
-
+  componentDidUpdate() {
+    this.props.getAllPosts();
+  }
   render() {
     return (
       <div className="cards-container">

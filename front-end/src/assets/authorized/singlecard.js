@@ -4,6 +4,7 @@ import Moment from "react-moment";
 import { history } from "../../App";
 import Modal from "react-responsive-modal";
 import Axios from "axios";
+import { FacebookShareButton } from "react-share";
 
 export default class Singlecard extends Component {
   state = {
@@ -12,7 +13,17 @@ export default class Singlecard extends Component {
     ishidden: "hidden",
     delete: "",
     report: "",
-    open: ""
+    open: "",
+    heartclass: "far fa-heart"
+  };
+
+  toggleLike = e => {
+    e.preventDefault();
+    if (this.state.heartclass === "fas fa-heart") {
+      this.setState({ heartclass: "far fa-heart" });
+    } else if (this.state.heartclass === "far fa-heart") {
+      this.setState({ heartclass: "fas fa-heart" });
+    }
   };
 
   onSureDelete = e => {
@@ -104,9 +115,16 @@ export default class Singlecard extends Component {
                   className="hidden-menu"
                   style={{ visibility: this.state.ishidden }}
                 >
-                  <li value="delete" name="delete" onClick={this.onDeleteclick}>
-                    Delete
-                  </li>
+                  {this.props.user._id === cardSingle.owner && (
+                    <li
+                      value="delete"
+                      name="delete"
+                      onClick={this.onDeleteclick}
+                    >
+                      Delete
+                    </li>
+                  )}
+
                   <li name="report" value="report">
                     Report
                   </li>
@@ -114,6 +132,9 @@ export default class Singlecard extends Component {
               </span>
               <section className="scroll-wrapper">
                 <div className="comment-wrapper scrollable">
+                  <span className="p">
+                    <span className="h3">{cardSingle.content}</span>{" "}
+                  </span>
                   {cardSingle.comments.map((comment, index) => (
                     <span className="comment-card" key={comment._id}>
                       <i
@@ -131,9 +152,22 @@ export default class Singlecard extends Component {
               </section>
               <div className="form">
                 <span className="card-icons">
-                  <i className="far fa-heart"></i>
-                  <i className="far fa-comment"></i>
-                  <i className="fab fa-telegram-plane"></i>
+                  <i
+                    onClick={this.toggleLike}
+                    className={this.state.heartclass}
+                  ></i>
+                  <i
+                    className="far fa-comment"
+                    onClick={() => {
+                      this.myInp.focus();
+                    }}
+                  ></i>
+                  {/* TODO*change this before going live */}
+                  <FacebookShareButton
+                    url={`http://www.google.com${history.location.pathname}`}
+                  >
+                    <i className="fab fa-telegram-plane"></i>
+                  </FacebookShareButton>
                   <i className="far fa-bookmark last-icon-right"></i>
                   <p className="card-date">
                     <Moment format="YYYY/MM/DD">{cardSingle.time}</Moment>
@@ -146,6 +180,7 @@ export default class Singlecard extends Component {
                 onSubmit={this.handleSubmit}
               >
                 <input
+                  ref={ip => (this.myInp = ip)}
                   onChange={this.handleChange}
                   name="comment"
                   placeholder="Add a comment..."
