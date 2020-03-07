@@ -45,7 +45,7 @@ img {
   cursor: pointer !important;
   opacity: 0.6;
   -webkit-transform: translate(0, -10px);
-  transform: translate(0, -5px);
+  transform: translate(0, -2px);
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }

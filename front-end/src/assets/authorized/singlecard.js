@@ -106,11 +106,18 @@ export default class Singlecard extends Component {
             ></span>
             <span className="footer">
               <span className="header">
-                <i id="round-icon" className="fas fa-user-circle icons"></i>
-                <p>{this.props.data}</p>
-                <p onClick={this.openMenu} className="hidden-menu-trigger">
-                  ...
-                </p>
+                <div className="header-sub">
+                  <i id="round-icon" className="fas fa-user-circle icons"></i>
+                  <p>{this.props.data}</p>
+                  <p onClick={this.openMenu} className="hidden-menu-trigger">
+                    ...
+                  </p>
+                </div>
+                <div className="header-sub-body">
+                  {" "}
+                  <span className="h3">{`"${cardSingle.content}"`}</span>
+                  {"  "}
+                </div>
                 <span
                   className="hidden-menu"
                   style={{ visibility: this.state.ishidden }}
@@ -132,9 +139,7 @@ export default class Singlecard extends Component {
               </span>
               <section className="scroll-wrapper">
                 <div className="comment-wrapper scrollable">
-                  <span className="p">
-                    <span className="h3">{cardSingle.content}</span>{" "}
-                  </span>
+                  <span className="p"></span>
                   {cardSingle.comments.map((comment, index) => (
                     <span className="comment-card" key={comment._id}>
                       <i
